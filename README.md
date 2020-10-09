@@ -1,4 +1,4 @@
-# dhuwitku_firebase
+# dhuwitku-firebase
 
 A new Flutter project.
 
