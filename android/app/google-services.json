@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "923765542875",
+    "firebase_url": "https://dhuwitku-bd1ca.firebaseio.com",
+    "project_id": "dhuwitku-bd1ca",
+    "storage_bucket": "dhuwitku-bd1ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923765542875:android:8f6bb82afd2d1cfe0b61fe",
+        "android_client_info": {
+          "package_name": "com.example.dhuwitku_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923765542875-ek3ag2lfgfm0usj91en1dooi1e59vm3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGNIWsWRzkZI6v-cHZNk-1JhyOUqo7FOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923765542875-ek3ag2lfgfm0usj91en1dooi1e59vm3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
