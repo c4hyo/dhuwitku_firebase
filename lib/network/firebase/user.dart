@@ -21,10 +21,6 @@ class UserServices {
         "tempat_tanggal_lahir": null,
         "is_admin": false
       });
-      await users.doc(userCredential.user.uid).collection("log-user").add({
-        "action": "Membuat akun",
-        "created_at": DateTime.now(),
-      });
       return userCredential.user;
     } catch (e) {
       return e;
@@ -37,21 +33,14 @@ class UserServices {
         email: email,
         password: password,
       );
-      await users.doc(userCredential.user.uid).collection("log-user").add({
-        "action": "Login",
-        "created_at": DateTime.now(),
-      });
+
       return userCredential.user;
     } catch (e) {
       return e;
     }
   }
 
-  static Future<void> signOut(String id) async {
-    await users.doc(id).collection("log-user").add({
-      "action": "log out",
-      "created_at": DateTime.now(),
-    });
+  static Future<void> signOut() async {
     await auth.signOut();
   }
 

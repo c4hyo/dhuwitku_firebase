@@ -4,7 +4,10 @@ import 'package:dhuwitku_firebase/network/model/money_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MoneyService {
-  static Future<void> addMoney({MoneyModel model, User user}) async {
+  static Future<void> addMoney({
+    MoneyModel model,
+    User user,
+  }) async {
     try {
       return await UserServices.users.doc(user.uid).collection("money").add({
         "judul": model.nama,
@@ -18,12 +21,16 @@ class MoneyService {
     }
   }
 
-  static Future<void> updateMoney({MoneyModel model, User user}) async {
+  static Future<void> updateMoney({
+    MoneyModel model,
+    User user,
+    String idMoney,
+  }) async {
     try {
       return await UserServices.users
           .doc(user.uid)
           .collection("money")
-          .doc(model.uid)
+          .doc(idMoney)
           .set(
         {
           "judul": model.nama,
@@ -41,7 +48,10 @@ class MoneyService {
     }
   }
 
-  static Future<void> deleteMoney({MoneyModel model, User user}) async {
+  static Future<void> deleteMoney({
+    MoneyModel model,
+    User user,
+  }) async {
     try {
       return await UserServices.users
           .doc(user.uid)

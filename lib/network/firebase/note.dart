@@ -9,29 +9,30 @@ class NoteServices {
       return await UserServices.users.doc(user.uid).collection("note").add({
         "judul": model.judul,
         "deskripsi": model.deskripsi,
-        "waktu_buat": DateTime.now(),
+        "waktu_buat": DateTime.now().toString(),
         "kategori": model.kategori,
         "is_pin": false,
-        "is_done": model.isDone
       });
     } catch (e) {
       return e;
     }
   }
 
-  static Future<void> updateNote({NoteModel model, User user}) async {
+  static Future<void> updateNote({
+    NoteModel model,
+    User user,
+    String idNote,
+  }) async {
     try {
       return await UserServices.users
           .doc(user.uid)
           .collection("note")
-          .doc(model.uid)
+          .doc(idNote)
           .set(
         {
           "judul": model.judul,
           "deskripsi": model.deskripsi,
-          "waktu_buat": DateTime.now(),
           "kategori": model.kategori,
-          "is_done": model.isDone
         },
         SetOptions(
           merge: true,

@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/user_mode.dart';
 import 'package:dhuwitku_firebase/ui/screen/auth/login.dart';
+import 'package:dhuwitku_firebase/ui/screen/home/home.dart';
+import 'package:dhuwitku_firebase/ui/screen/money/money_all.dart';
+import 'package:dhuwitku_firebase/ui/screen/note/note_all.dart';
 import 'package:dhuwitku_firebase/ui/screen/profile/profile.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,11 +14,18 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  initializeDateFormatting('id_ID', null).then(
+    (_) => runApp(
+      MyApp(),
+    ),
+  );
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -80,9 +90,21 @@ class Mains extends StatefulWidget {
 class _MainsState extends State<Mains> {
   int _selectTab = 0;
   List<Widget> _tabUser() => [
-        Text("Home"),
-        Text("Note"),
-        Text("Money"),
+        HomeScreen(
+          isAdmin: widget.isAdmin,
+          user: widget.user,
+          userModel: widget.userModel,
+        ),
+        NoteAllScreen(
+          isAdmin: widget.isAdmin,
+          user: widget.user,
+          userModel: widget.userModel,
+        ),
+        MoneyAllScreen(
+          isAdmin: widget.isAdmin,
+          user: widget.user,
+          userModel: widget.userModel,
+        ),
         ProfileScreen(
           isAdmin: widget.isAdmin,
           user: widget.user,
@@ -90,7 +112,11 @@ class _MainsState extends State<Mains> {
         ),
       ];
   List<Widget> _tabAdmin() => [
-        Text("Home"),
+        HomeScreen(
+          isAdmin: widget.isAdmin,
+          user: widget.user,
+          userModel: widget.userModel,
+        ),
         Text("User"),
         Text("Category"),
         ProfileScreen(
@@ -140,11 +166,13 @@ class _MainsState extends State<Mains> {
     final List<Widget> _list = (widget.isAdmin) ? _tabAdmin() : _tabUser();
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        backgroundColor: cream,
         items: (widget.isAdmin) ? _bnbAdmin : _bnbUser,
         currentIndex: _selectTab,
         iconSize: 40,
-        unselectedItemColor: dustyR,
-        selectedItemColor: coral,
+        unselectedItemColor: turquoise,
+        selectedItemColor: tuatara,
         onTap: (value) {
           setState(() {
             _selectTab = value;

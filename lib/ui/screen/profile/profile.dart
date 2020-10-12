@@ -1,5 +1,6 @@
 import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/user_mode.dart';
+import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,9 +22,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: turquoise,
         actions: [
           IconButton(
-            icon: Icon(Icons.exit_to_app),
+            icon: Icon(
+              Icons.exit_to_app,
+              color: tuatara,
+              size: 40,
+            ),
             onPressed: () {
               Alert(
                 context: context,
@@ -36,10 +42,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      await UserServices.signOut(widget.user.uid);
+                      await UserServices.signOut();
                       Get.back();
                     },
-                    color: Colors.red,
+                    color: turquoise,
                   ),
                   DialogButton(
                     child: Text("Tidak"),
@@ -55,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: SafeArea(
         child: Center(
-          child: Text("Profile"),
+          child: Text("${widget.userModel.nama}"),
         ),
       ),
     );
