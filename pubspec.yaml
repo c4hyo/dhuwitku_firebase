@@ -34,8 +34,8 @@ dependencies:
   google_fonts: ^1.1.0
   intl: ^0.16.1
   provider: ^4.3.2+2
+  rflutter_alert: ^1.1.0
   supercharged: ^1.10.0
-
 
 dev_dependencies:
   flutter_test:
