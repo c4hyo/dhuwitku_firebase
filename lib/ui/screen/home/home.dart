@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/user_mode.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,19 +74,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  Card(
-                    color: turquoise,
-                    child: ListTile(
-                      title: Text("Catatan Saya"),
-                      trailing: Icon(
-                        FontAwesome.sticky_note,
-                        size: 80,
-                      ),
-                      subtitle: Text(
-                        "10",
-                        style: TextStyle(fontSize: 50),
-                      ),
-                    ),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: UserServices.users
+                        .doc(widget.user.uid)
+                        .collection("note")
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Card(
+                          color: turquoise,
+                          child: ListTile(
+                            title: Text("Catatan Saya"),
+                            trailing: Icon(
+                              FontAwesome.sticky_note,
+                              size: 80,
+                            ),
+                            subtitle: Text(
+                              "0",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                          ),
+                        );
+                      }
+                      return Card(
+                        color: turquoise,
+                        child: ListTile(
+                          title: Text("Catatan Saya"),
+                          trailing: Icon(
+                            FontAwesome.sticky_note,
+                            size: 80,
+                          ),
+                          subtitle: Text(
+                            snapshot.data.docs.length.toString(),
+                            style: TextStyle(fontSize: 50),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 10,
