@@ -6,6 +6,7 @@ import 'package:dhuwitku_firebase/ui/screen/home/home.dart';
 import 'package:dhuwitku_firebase/ui/screen/money/money_all.dart';
 import 'package:dhuwitku_firebase/ui/screen/note/note_all.dart';
 import 'package:dhuwitku_firebase/ui/screen/profile/profile.dart';
+import 'package:dhuwitku_firebase/ui/screen/user/user_all.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -117,8 +118,11 @@ class _MainsState extends State<Mains> {
           user: widget.user,
           userModel: widget.userModel,
         ),
-        Text("User"),
-        Text("Category"),
+        UserAllScreen(
+          isAdmin: widget.isAdmin,
+          user: widget.user,
+          userModel: widget.userModel,
+        ),
         ProfileScreen(
           isAdmin: widget.isAdmin,
           user: widget.user,
@@ -151,10 +155,6 @@ class _MainsState extends State<Mains> {
     BottomNavigationBarItem(
       icon: Icon(FontAwesome.users),
       title: Text("Users"),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(FontAwesome.tags),
-      title: Text("Categories"),
     ),
     BottomNavigationBarItem(
       icon: Icon(FontAwesome.user_circle),

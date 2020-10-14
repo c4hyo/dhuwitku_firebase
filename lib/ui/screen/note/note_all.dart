@@ -4,15 +4,12 @@ import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/note_model.dart';
 import 'package:dhuwitku_firebase/network/model/user_mode.dart';
 import 'package:dhuwitku_firebase/ui/screen/note/note_add.dart';
-import 'package:dhuwitku_firebase/ui/screen/note/note_edit.dart';
 import 'package:dhuwitku_firebase/ui/widget/card.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class NoteAllScreen extends StatefulWidget {
   final User user;

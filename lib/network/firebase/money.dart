@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/money_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class MoneyService {
   static Future<void> addMoney({
@@ -10,9 +11,10 @@ class MoneyService {
   }) async {
     try {
       return await UserServices.users.doc(user.uid).collection("money").add({
-        "judul": model.nama,
-        "deskripsi": model.jenis,
-        "waktu_buat": DateTime.now(),
+        "nama": model.nama,
+        "deskripsi": model.deskripsi,
+        "jenis": model.jenis,
+        "waktu_buat": DateFormat('yyyy-MM-dd').format(DateTime.now()),
         "kategori": model.kategori,
         "nominal": model.nominal,
       });
@@ -33,9 +35,9 @@ class MoneyService {
           .doc(idMoney)
           .set(
         {
-          "judul": model.nama,
-          "deskripsi": model.jenis,
-          "waktu_buat": DateTime.now(),
+          "nama": model.nama,
+          "jenis": model.jenis,
+          "deskripsi": model.deskripsi,
           "kategori": model.kategori,
           "nominal": model.nominal,
         },
@@ -55,7 +57,7 @@ class MoneyService {
     try {
       return await UserServices.users
           .doc(user.uid)
-          .collection("note")
+          .collection("money")
           .doc(model.uid)
           .delete();
     } catch (e) {
