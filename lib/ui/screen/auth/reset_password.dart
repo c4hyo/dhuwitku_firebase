@@ -2,19 +2,17 @@ import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class RegistrasiScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   @override
-  _RegistrasiScreenState createState() => _RegistrasiScreenState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _RegistrasiScreenState extends State<RegistrasiScreen> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool _isLoading = false;
-  String _email, _password, _nama;
+  String _email, _password;
   GlobalKey<FormState> _form = new GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +38,7 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
             key: _form,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: 170,
@@ -54,7 +53,7 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                           height: 10,
                         ),
                         Text(
-                          "Registrasi Pengguna",
+                          "Reset Password",
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 25,
@@ -65,39 +64,8 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      onSaved: (newValue) {
-                        _nama = newValue;
-                      },
-                      validator: (value) {
-                        if (value.isEmpty || value == null || value == "") {
-                          return "Nama tidak boleh kosong";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: Colors.transparent,
-                            width: 3,
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: turquoise,
-                            width: 3,
-                          ),
-                        ),
-                        labelText: "Nama",
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),
@@ -137,46 +105,8 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      onSaved: (value) {
-                        _password = value;
-                      },
-                      validator: (value) {
-                        if (value.isEmpty || value == null || value == "") {
-                          return "Password tidak boleh kosong";
-                        }
-                        if (value.length < 8) {
-                          return "Password minimal 8 karakter";
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                        ),
-                        labelText: "Password",
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: Colors.transparent,
-                            width: 3,
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: turquoise,
-                            width: 3,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),
@@ -190,7 +120,7 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                       child: (_isLoading)
                           ? CircularProgressIndicator()
                           : Text(
-                              "Registrasi",
+                              "Reset Password",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -203,12 +133,10 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                             _isLoading = true;
                           });
                           try {
-                            await UserServices.signup(
+                            await UserServices.signIn(
                               email: _email,
-                              nama: _nama,
                               password: _password,
                             );
-                            Get.back();
                           } catch (e) {
                             setState(() {
                               _isLoading = false;
@@ -217,7 +145,7 @@ class _RegistrasiScreenState extends State<RegistrasiScreen> {
                               context: context,
                               title: "Gagal",
                               type: AlertType.error,
-                              desc: "Gagal registrasi",
+                              desc: "Gagal login",
                               buttons: [
                                 DialogButton(
                                   child: Text(

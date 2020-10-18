@@ -1,5 +1,6 @@
 import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/ui/screen/auth/registrasi.dart';
+import 'package:dhuwitku_firebase/ui/screen/auth/reset_password.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 50,
-                          child: FlutterLogo(
-                            size: 100,
-                          ),
-                          backgroundColor: cream,
+                          radius: 60,
+                          backgroundImage: AssetImage("asset/logo.png"),
+                          backgroundColor: Colors.transparent,
                         ),
                         SizedBox(
                           height: 10,
@@ -60,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           "Login Pengguna",
                           style: TextStyle(
-                            color: Colors.black38,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 25,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.bold,
@@ -149,7 +148,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            ResetPasswordScreen(),
+                            transition: Transition.fadeIn,
+                          );
+                        },
+                        child: Text(
+                          "Reset Password",
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),

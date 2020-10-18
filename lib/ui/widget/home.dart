@@ -336,9 +336,9 @@ Widget homeAdmin({UserModel userModel, User user}) {
             return Card(
               color: turquoise,
               child: ListTile(
-                title: Text("Catatan Saya"),
+                title: Text("Pengguna"),
                 trailing: Icon(
-                  FontAwesome.sticky_note,
+                  FontAwesome.users,
                   size: 80,
                 ),
                 subtitle: Text(
@@ -351,7 +351,7 @@ Widget homeAdmin({UserModel userModel, User user}) {
           return Card(
             color: turquoise,
             child: ListTile(
-              title: Text("Catatan Saya"),
+              title: Text("Pengguna"),
               trailing: Icon(
                 FontAwesome.sticky_note,
                 size: 80,
