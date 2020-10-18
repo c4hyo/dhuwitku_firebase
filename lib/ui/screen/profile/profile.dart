@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/network/model/user_mode.dart';
+import 'package:dhuwitku_firebase/ui/screen/profile/ganti_password.dart';
 import 'package:dhuwitku_firebase/ui/screen/profile/profile_update.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -132,6 +133,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPressed: () {
                               Get.to(
                                 ProfileUpdateScreen(
+                                  isAdmin: widget.isAdmin,
+                                  user: widget.user,
+                                  userModel: model,
+                                ),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                          ),
+                          MaterialButton(
+                            height: 40,
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent)),
+                            minWidth:
+                                MediaQuery.of(context).size.width * (1 / 2),
+                            color: peach,
+                            child: Text(
+                              "Ubah Password",
+                              style: TextStyle(
+                                color: tuatara,
+                                fontSize: 15,
+                              ),
+                            ),
+                            onPressed: () {
+                              Get.to(
+                                ChangePasswordScreen(
                                   isAdmin: widget.isAdmin,
                                   user: widget.user,
                                   userModel: model,

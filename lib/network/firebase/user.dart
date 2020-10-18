@@ -14,6 +14,10 @@ class UserServices {
         email: email,
         password: password,
       );
+      await userCredential.user.updateProfile(
+        displayName: nama,
+      );
+
       await users.doc(userCredential.user.uid).set({
         "nama": nama,
         "telepon": null,
@@ -44,6 +48,15 @@ class UserServices {
     await auth.signOut();
   }
 
+  static Future<void> changePassword({String password, User user}) async {
+    try {
+      await user.updatePassword(password);
+      return await auth.signOut();
+    } catch (e) {
+      return e;
+    }
+  }
+
   static Stream<User> get checkUser => auth.authStateChanges();
 
   static Future<DocumentSnapshot> getProfil(String id) async {
@@ -56,6 +69,7 @@ class UserServices {
 
   static Future<void> updateProfil({User user, UserModel model}) async {
     try {
+      await user.updateProfile(displayName: model.nama);
       return await users.doc(user.uid).set(
         {
           "nama": model.nama,

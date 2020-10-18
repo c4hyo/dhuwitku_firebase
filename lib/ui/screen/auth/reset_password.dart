@@ -2,6 +2,7 @@ import 'package:dhuwitku_firebase/network/firebase/user.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool _isLoading = false;
-  String _email, _password;
+  String _email;
   GlobalKey<FormState> _form = new GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -133,10 +134,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             _isLoading = true;
                           });
                           try {
-                            await UserServices.signIn(
+                            await UserServices.auth.sendPasswordResetEmail(
                               email: _email,
-                              password: _password,
                             );
+                            Get.back();
                           } catch (e) {
                             setState(() {
                               _isLoading = false;
@@ -145,7 +146,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               context: context,
                               title: "Gagal",
                               type: AlertType.error,
-                              desc: "Gagal login",
+                              desc: "Gagal mengirim email",
                               buttons: [
                                 DialogButton(
                                   child: Text(
