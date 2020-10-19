@@ -6,6 +6,7 @@ import 'package:dhuwitku_firebase/network/model/user_mode.dart';
 import 'package:dhuwitku_firebase/ui/screen/money/money_add.dart';
 import 'package:dhuwitku_firebase/ui/widget/card.dart';
 import 'package:dhuwitku_firebase/utilities/colors.dart';
+import 'package:dhuwitku_firebase/utilities/text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -43,9 +44,30 @@ class _MoneyAllScreenState extends State<MoneyAllScreen> {
     }
   }
 
+  int total = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: turquoise,
+        onPressed: () {
+          Get.to(
+            MoneyAddScreen(
+              isAdmin: widget.isAdmin,
+              user: widget.user,
+              userModel: widget.userModel,
+            ),
+            transition: Transition.fadeIn,
+          );
+        },
+        child: Icon(
+          Ionicons.ios_add,
+          color: tuatara,
+          size: 40,
+        ),
+      ),
       appBar: AppBar(
         leading:
             IconButton(icon: Icon(Icons.calendar_today), onPressed: _datePick),
@@ -60,25 +82,23 @@ class _MoneyAllScreenState extends State<MoneyAllScreen> {
         ),
         elevation: 0,
         backgroundColor: turquoise,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Ionicons.ios_add_circle,
-              color: tuatara,
-              size: 40,
-            ),
-            onPressed: () {
-              Get.to(
-                MoneyAddScreen(
-                  isAdmin: widget.isAdmin,
-                  user: widget.user,
-                  userModel: widget.userModel,
+        bottom: PreferredSize(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  tglIndo(tanggal: _filterTanggal),
+                  style: TextStyle(
+                    color: tuatara,
+                    fontSize: 18,
+                  ),
                 ),
-                transition: Transition.fadeIn,
-              );
-            },
-          )
-        ],
+              ],
+            ),
+          ),
+          preferredSize: Size.fromHeight(30),
+        ),
       ),
       body: SafeArea(
         child: Container(
